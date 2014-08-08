@@ -10,18 +10,32 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import javax.swing.*;
 
-public class Calculadora {
+public class Calculador {
     public static int cont=0;
     static File archivo = new File("C:\\HDT4\\datos.txt"); //Almacena el archivo en donde se guardaran los datos
     java.io.File directorio = new File("C:\\HDT4");
     public static String data=new String();
-    static Stack pila = new StackVector();
+    static Stack pila;
     static int result=0;
     static int dat1=0;
     static int dat2=0;
+    boolean conti =true;
+    int op=0;
     
-public static void main(String[] args) {
+    public Calculador(){
+        while(conti == true){
+           op = Integer.parseInt(JOptionPane.showInputDialog("\n1)ArrayList\n2)Vector\n3)lista"));
+           if(op>=1 || op <=3){
+               conti = false;
+           }
+        }
+        Factory factor = new Factory();
+        pila = factor.getStack(op);
+    }
+    
+public void calcular(){
     
     data=leerDatos();
     int largo = data.length();
@@ -55,7 +69,7 @@ public static void main(String[] args) {
     }
     System.out.println("el resultado es: "+pila.pop());
 }
-    public static String leerDatos(){
+    private static String leerDatos(){
             FileReader fr = null;
             BufferedReader br = null;
             String datos = new String();
